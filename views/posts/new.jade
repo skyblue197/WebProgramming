@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  .container
+    h1 설문 작성
+
+    form(action='/posts', method='POST')
+      .form-group
+        label(for='email') 작성자
+        input.form-control(name='email', placeholder='작성자')
+      .form-group
+        label(for='question') 질문
+        input.form-control(name='question', placeholder='질문 입력:')
+      |　
+      .form-group
+        label(for='view1') 보기 1
+        input.form-control(name='view1', placeholder='보기1:')
+        label(for='view2') 보기 2
+        input.form-control(name='view2', placeholder='보기2:')
+        label(for='view3') 보기 3
+        input.form-control(name='view3', placeholder='보기3:')
+        label(for='view4') 보기 4
+        input.form-control(name='view4', placeholder='보기4:')
+      |　
+
+      div.form-action
+        a.btn.btn-default(href='javascript:window.history.back();') 뒤로
+        | &nbsp;
+        button.btn.btn-primary(type='submit') 설문 작성

@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+  .container
+    h1= post.question
+
+    form(action='/posts', method='POST')
+      form-inline(type='text', name='question')
+      p.well(style='white-space:pre;')= post.question
+
+    hr
+
+    form.form-inline(action='/posts/' + post._id + '/comments', method='POST')
+      hr
+      .form-group
+        label(for='answer') 보기 1
+        input(type='radio', name='answer', value='보기 1')
+        p.well(style='white-space:pre;')= post.view1
+        label(for='answer') 보기 2
+        input(type='radio', name='answer', value='보기 2')
+        p.well(style='white-space:pre;')= post.view2
+        label(for='answer') 보기 3
+        input(type='radio', name='answer', value='보기 3')
+        p.well(style='white-space:pre;')= post.view3
+        label(for='answer') 보기 4
+        input(type='radio', name='answer', value='보기 4')
+        p.well(style='white-space:pre;')= post.view4
+
+      hr
+      .form-group
+        label.sr-only(for='email') email
+        input.form-control(name='email', placeholder='작성자')
+      .form-group
+        label.sr-only(for='content') content
+        input.form-control(name='content', size=50, placeholder='의견을 적어주세요')
+      hr
+      button.btn.btn-info 설문 저장
+      hr
+
+      h3Comments (#{post.numComment})
+      table.table
+        tr
+          th 작성자
+          th 작성 시간
+          th
+        each comment in comments
+          tr
+            td= comment.email
+            td= moment(comment.createdAt).format('YYYY/MM/DD')
+            td
+              a.button.btn-success.btn-lg(href='/posts/comments/#{comment.id}') 내용 보기
+    a.btn.btn-default(href='/posts') 목록
